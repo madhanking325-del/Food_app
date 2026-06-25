@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MADFUD | MENU SPEEDWAY</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100..900;1,100..900&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#353535",
+                    "on-secondary-fixed-variant": "#474746",
+                    "tertiary": "#ffffff",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "primary-fixed": "#c3f400",
+                    "on-surface": "#e4e2e1",
+                    "secondary-container": "#474746",
+                    "on-primary": "#283500",
+                    "tertiary-container": "#d7e2ff",
+                    "primary": "#ffffff",
+                    "inverse-on-surface": "#303030",
+                    "secondary-fixed": "#e5e2e1",
+                    "inverse-primary": "#506600",
+                    "primary-fixed-dim": "#abd600",
+                    "on-error": "#690005",
+                    "surface-container-lowest": "#0e0e0e",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "on-secondary-container": "#b7b5b4",
+                    "on-tertiary-fixed-variant": "#004590",
+                    "secondary": "#c8c6c5",
+                    "on-secondary": "#313030",
+                    "surface": "#131313",
+                    "on-error-container": "#ffdad6",
+                    "background": "#131313",
+                    "surface-container-low": "#1b1c1c",
+                    "inverse-surface": "#e4e2e1",
+                    "on-tertiary-fixed": "#001b3f",
+                    "surface-container": "#1f2020",
+                    "on-primary-fixed": "#161e00",
+                    "on-background": "#e4e2e1",
+                    "outline-variant": "#444933",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "on-surface-variant": "#c4c9ac",
+                    "on-primary-container": "#556d00",
+                    "outline": "#8e9379",
+                    "surface-variant": "#353535",
+                    "tertiary-fixed": "#d7e2ff",
+                    "surface-dim": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "on-tertiary": "#002f66",
+                    "surface-bright": "#393939",
+                    "on-primary-fixed-variant": "#3c4d00",
+                    "surface-tint": "#abd600",
+                    "on-tertiary-container": "#0062c7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Hanken Grotesk"],
+                    "display-lg": ["Anybody"],
+                    "label-price": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Anybody"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "label-technical": ["JetBrains Mono"],
+                    "headline-md": ["Anybody"],
+                    "headline-lg": ["Anybody"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-lg": ["72px", {"lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900"}],
+                    "label-price": ["20px", {"lineHeight": "1.0", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-technical": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @keyframes vroom-fade {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: translate(20px, -40px) scale(1.5) rotate(-10deg); opacity: 1; }
+            100% { transform: translate(40px, -80px) scale(2) rotate(-20deg); opacity: 0; }
+        }
+        .vroom-effect {
+            animation: vroom-fade 0.8s ease-out forwards;
+            pointer-events: none;
+            position: absolute;
+            z-index: 100;
+            font-family: 'Anybody', sans-serif;
+            font-weight: 900;
+            font-style: italic;
+            color: #c3f400;
+            -webkit-text-stroke: 1px black;
+        }
+        .glitch-hover:hover {
+            animation: glitch 0.1s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        .halftone-bg {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 12px 12px;
+        }
+        .scroll-driver {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            transition: top 0.3s ease-out, transform 0.1s linear;
+        }
+        .racing-stripe {
+            background: repeating-linear-gradient(45deg, #c3f400, #c3f400 10px, transparent 10px, transparent 20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background halftone-bg min-h-screen font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
+<!-- Scroll Driver Animation -->
+<div class="scroll-driver hidden md:flex flex-col items-center gap-2" id="driver">
+<span class="material-symbols-outlined text-primary-fixed text-4xl" style="font-variation-settings: 'FILL' 1;">sports_motorsports</span>
+<div class="w-1 h-24 racing-stripe opacity-30"></div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b-2 border-primary-fixed/20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md max-w-full">
+<div class="flex items-center gap-stack-md">
+<span class="font-display-lg text-headline-lg-mobile md:text-headline-md italic font-black text-primary-fixed tracking-tighter">MADFUD</span>
+</div>
+<div class="hidden md:flex gap-gutter">
+<a class="font-body-md text-body-md italic uppercase text-primary-fixed border-b-2 border-primary-fixed pb-1" href="#">MENU</a>
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105" href="#">PIT STOP</a>
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105" href="#">TEAM</a>
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105" href="#">HISTORY</a>
+</div>
+<button class="bg-primary-fixed text-on-primary-fixed font-display-lg text-[14px] px-stack-md py-stack-sm italic font-black uppercase hover:skew-x-[-12deg] transition-all glitch-hover">
+                START ENGINE
+            </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="pt-32 pb-16 px-margin-mobile md:px-margin-desktop relative overflow-hidden">
+<div class="absolute -left-10 top-20 opacity-10 pointer-events-none">
+<span class="font-display-lg text-[200px] italic font-black leading-none select-none">FAST AS F***</span>
+</div>
+<div class="relative z-10">
+<h1 class="font-display-lg text-display-lg italic font-black text-primary-fixed mb-stack-sm uppercase leading-[0.8] flex flex-col">
+<span class="text-on-surface">BURGER</span>
+<span class="pl-stack-lg">SPEEDWAY</span>
+</h1>
+<div class="flex items-center gap-stack-md mt-stack-md">
+<div class="h-1 w-24 bg-primary-fixed"></div>
+<p class="font-label-technical text-label-technical uppercase tracking-widest text-primary-fixed">Technical Specifications &amp; Fueling Options</p>
+</div>
+</div>
+</header>
+<!-- Menu Filter Bar -->
+<div class="sticky top-[76px] z-40 bg-surface-container-low/95 backdrop-blur-md border-y border-outline-variant py-stack-sm px-margin-mobile md:px-margin-desktop mb-stack-lg">
+<div class="flex gap-stack-md overflow-x-auto pb-2 no-scrollbar">
+<button class="bg-primary-fixed text-on-primary-fixed px-stack-md py-stack-sm italic font-bold text-label-technical uppercase rounded-none whitespace-nowrap">ALL UNITS</button>
+<button class="border border-outline text-on-surface-variant px-stack-md py-stack-sm italic font-bold text-label-technical uppercase rounded-none whitespace-nowrap hover:border-primary-fixed hover:text-primary-fixed transition-colors">V8 BURGERS</button>
+<button class="border border-outline text-on-surface-variant px-stack-md py-stack-sm italic font-bold text-label-technical uppercase rounded-none whitespace-nowrap hover:border-primary-fixed hover:text-primary-fixed transition-colors">NITRO SIDES</button>
+<button class="border border-outline text-on-surface-variant px-stack-md py-stack-sm italic font-bold text-label-technical uppercase rounded-none whitespace-nowrap hover:border-primary-fixed hover:text-primary-fixed transition-colors">FUEL (DRINKS)</button>
+</div>
+</div>
+<!-- Menu Grid -->
+<main class="px-margin-mobile md:px-margin-desktop pb-32">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Food Card 1 -->
+<div class="group relative bg-surface-container border border-outline-variant hover:border-primary-fixed transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A macro cinematic shot of a massive double beef burger with melting cheddar cheese, crispy bacon, and a brioche bun. The lighting is high-contrast with neon yellow rim highlights against a dark charcoal background, creating a high-performance racing aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYpmIE5LxQMvMAUepFCJ2vkkcJORfeE8bCucpoBf16NywWhcufCZrl6b_67oxTOEi4yjdDdsrU7ekX6XKRUqcQHzVFb6lLwUeNt57Og_H-jUCD5SoV2tn-QfvSmBnaXCqrl5QOupSxxhyGYP-awGVWZVgZixw9P0_ANeNvbSh7HPoWKERJkOOBSRbKusNfES4ovaKM9ub3tWxNEpIx7QgKHE8SeQUz5tJO3pp05as7y-bz7h22gewAyGRIsowr0d9RP0WixJ4-x-s"/>
+<div class="absolute top-0 right-0 bg-primary-fixed text-on-primary-fixed p-stack-sm font-label-technical italic font-black">FAST DELIVERY</div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md italic uppercase text-on-surface">TURBO CHARGER</h3>
+<span class="font-label-price text-label-price text-primary-fixed">$14.00</span>
+</div>
+<!-- Spec Sheet Body -->
+<div class="space-y-unit border-t border-dashed border-outline-variant pt-stack-sm mt-stack-sm">
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">POWER OUTPUT (HP)</span>
+<span class="font-label-technical text-primary-fixed">850 CAL</span>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">DRAG LEVEL (RPM)</span>
+<div class="flex gap-1 text-primary-fixed">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">CHASSIS</span>
+<span class="font-label-technical text-on-surface uppercase">BRIOCHE / DOUBLE BEEF</span>
+</div>
+</div>
+<button class="mt-stack-md w-full py-stack-sm bg-surface-container-highest border-2 border-primary-fixed/20 text-primary-fixed font-display-lg text-[16px] italic font-black uppercase hover:bg-primary-fixed hover:text-on-primary-fixed transition-all flex items-center justify-center gap-2 group/btn" onclick="addEffect(this)">
+                        ADD TO TANK
+                        <span class="material-symbols-outlined text-md group-hover/btn:translate-x-1 transition-transform">bolt</span>
+</button>
+</div>
+</div>
+<!-- Food Card 2 -->
+<div class="group relative bg-surface-container border border-outline-variant hover:border-primary-fixed transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up of golden crispy french fries seasoned with neon green herbs and red chili flakes, served in a black industrial cardboard container. The background features dark charcoal textures with electric blue and yellow lighting accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrY3RKh5nXhsMy_Mo6G3GKmfmJ3e4QSp_b-lY7flX0-utvzFHZwFtZVMLh21uh7_4io2buzcdQWYjH8mHCtZ7wpFSMRkH8afVBGVRT9r4DkGnxY3kaVm8w1ZmqWnRv1_gmRdJBo5ijTgdamFQR_jK5USKrkgShQRGOqIsTSKJyvDYQbJ9VtUyej1TZKXvHCjDTxyDm41jYbM7lj2BExKJ6TIn4rReEGx05Tp4YEboPUozMR2kfjCTpRxW4QJM9ua4sh1NYSgrD-mo"/>
+<div class="absolute top-0 right-0 bg-primary-fixed text-on-primary-fixed p-stack-sm font-label-technical italic font-black">HIGH NITRO</div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md italic uppercase text-on-surface">NITRO FRIES</h3>
+<span class="font-label-price text-label-price text-primary-fixed">$6.50</span>
+</div>
+<div class="space-y-unit border-t border-dashed border-outline-variant pt-stack-sm mt-stack-sm">
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">POWER OUTPUT (HP)</span>
+<span class="font-label-technical text-primary-fixed">420 CAL</span>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">DRAG LEVEL (RPM)</span>
+<div class="flex gap-1 text-primary-fixed">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">CHASSIS</span>
+<span class="font-label-technical text-on-surface uppercase">SEA SALT / CHILI</span>
+</div>
+</div>
+<button class="mt-stack-md w-full py-stack-sm bg-surface-container-highest border-2 border-primary-fixed/20 text-primary-fixed font-display-lg text-[16px] italic font-black uppercase hover:bg-primary-fixed hover:text-on-primary-fixed transition-all flex items-center justify-center gap-2 group/btn" onclick="addEffect(this)">
+                        ADD TO TANK
+                        <span class="material-symbols-outlined text-md group-hover/btn:translate-x-1 transition-transform">bolt</span>
+</button>
+</div>
+</div>
+<!-- Food Card 3 -->
+<div class="group relative bg-surface-container border border-outline-variant hover:border-primary-fixed transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A spicy chicken sandwich with vibrant red buffalo sauce dripping, crunchy pickles, and jalapeños. The shot is low-angle and aggressive, styled with high-contrast racing lights in neon yellow and dark charcoal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCfgy9ukZ6_6ekQBuqOLp9UoIAYZGQUS15eJoAiq2e3CPhM5D2H3SeMvwSGOznUHtzMLwQZ_e8TonYe3cf5zQYIaoy-HEsM-JDCxGwREvvry-zpN-ANbCiSbUS-Wa7-bcmXKtZg0DcRnGMFHOUy3_78YrONnjUJtHIRSsxNf-_uq5-UXbNrnYx3-KcFWCXqji161FB5f-a3bVZh9Ccbo04E3TrpPYjlFLkAfNIzSPptvG8LbjJfAuhLM40J7syHJu2Yqel5jxl4mQ"/>
+<div class="absolute top-0 right-0 bg-primary-fixed text-on-primary-fixed p-stack-sm font-label-technical italic font-black">HOT LAP</div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md italic uppercase text-on-surface">REDLINE CHICKEN</h3>
+<span class="font-label-price text-label-price text-primary-fixed">$12.50</span>
+</div>
+<div class="space-y-unit border-t border-dashed border-outline-variant pt-stack-sm mt-stack-sm">
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">POWER OUTPUT (HP)</span>
+<span class="font-label-technical text-primary-fixed">710 CAL</span>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">DRAG LEVEL (RPM)</span>
+<div class="flex gap-1 text-primary-fixed">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">CHASSIS</span>
+<span class="font-label-technical text-on-surface uppercase">CRISPY / HABANERO</span>
+</div>
+</div>
+<button class="mt-stack-md w-full py-stack-sm bg-surface-container-highest border-2 border-primary-fixed/20 text-primary-fixed font-display-lg text-[16px] italic font-black uppercase hover:bg-primary-fixed hover:text-on-primary-fixed transition-all flex items-center justify-center gap-2 group/btn" onclick="addEffect(this)">
+                        ADD TO TANK
+                        <span class="material-symbols-outlined text-md group-hover/btn:translate-x-1 transition-transform">bolt</span>
+</button>
+</div>
+</div>
+<!-- Food Card 4 -->
+<div class="group relative bg-surface-container border border-outline-variant hover:border-primary-fixed transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A thick, creamy vanilla milkshake topped with neon yellow sprinkles and a black straw, set against a dark, moody racing-inspired background with motion blur streaks in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5br-hFxfUtFXPEwKqM8Oo2RLgLrIMg259v-qT65qp2j3_REk2zVgE1tTZcYnyq0vgFI76yUqd4syl5bny9fkP7lPX8EqAuo69hnSrLf9yjjPhZBo4won84UbnoPV6RCCVVI9uH3ETKZeeLr7Rg8hh0jTuXAsEPqFMbgsQ8n5ZSFMThMg4bTADTVl5PV51ApRvztdP8PjQKWXjqY7QE-Qb8qeJsMc2KkAK9W2od8UuILaYrGjFqotYA54SxVloYMv9fj0OPSgvKqQ"/>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md italic uppercase text-on-surface">COOLANT SHAKE</h3>
+<span class="font-label-price text-label-price text-primary-fixed">$5.50</span>
+</div>
+<div class="space-y-unit border-t border-dashed border-outline-variant pt-stack-sm mt-stack-sm">
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">POWER OUTPUT (HP)</span>
+<span class="font-label-technical text-primary-fixed">600 CAL</span>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">DRAG LEVEL (RPM)</span>
+<div class="flex gap-1 text-primary-fixed">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">CHASSIS</span>
+<span class="font-label-technical text-on-surface uppercase">DAIRY / VANILLA BEAN</span>
+</div>
+</div>
+<button class="mt-stack-md w-full py-stack-sm bg-surface-container-highest border-2 border-primary-fixed/20 text-primary-fixed font-display-lg text-[16px] italic font-black uppercase hover:bg-primary-fixed hover:text-on-primary-fixed transition-all flex items-center justify-center gap-2 group/btn" onclick="addEffect(this)">
+                        ADD TO TANK
+                        <span class="material-symbols-outlined text-md group-hover/btn:translate-x-1 transition-transform">bolt</span>
+</button>
+</div>
+</div>
+<!-- Food Card 5 -->
+<div class="group relative bg-surface-container border border-outline-variant hover:border-primary-fixed transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A plant-based burger with avocado, sprouts, and a black charcoal bun, presented in a futuristic technical style with fluorescent green lighting and a dark industrial surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQJLbr6WQ_4QPRC57RmSshvKLXb2G5n3VxhXuxPddyQbgV9OItWscpFzkSDqhtv-v4E8qoGhGbn86Qt6eSD9LU_3ZxSHSPEbQdukbk00Cmbp91lCgKH64dR0Tg2ev4Z4LNHeq49-GZaupQ3vC2DBKdz0Q98ZXtrjqmvrTSk5JznU7Mgz_Ld-mJ5SV5EppiltIXrlpD_rWz5tfxahY60-VhtsaemWfmOXAYRyFnXPPbOE5XYAVU1HGj4z0vHl40Ifp0EysEhfYBKRI"/>
+<div class="absolute top-0 right-0 bg-primary-fixed text-on-primary-fixed p-stack-sm font-label-technical italic font-black">ECO-MODE</div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md italic uppercase text-on-surface">E-BURGER</h3>
+<span class="font-label-price text-label-price text-primary-fixed">$13.00</span>
+</div>
+<div class="space-y-unit border-t border-dashed border-outline-variant pt-stack-sm mt-stack-sm">
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">POWER OUTPUT (HP)</span>
+<span class="font-label-technical text-primary-fixed">550 CAL</span>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">DRAG LEVEL (RPM)</span>
+<div class="flex gap-1 text-primary-fixed">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">CHASSIS</span>
+<span class="font-label-technical text-on-surface uppercase">PLANT-BASED / CHARCOAL</span>
+</div>
+</div>
+<button class="mt-stack-md w-full py-stack-sm bg-surface-container-highest border-2 border-primary-fixed/20 text-primary-fixed font-display-lg text-[16px] italic font-black uppercase hover:bg-primary-fixed hover:text-on-primary-fixed transition-all flex items-center justify-center gap-2 group/btn" onclick="addEffect(this)">
+                        ADD TO TANK
+                        <span class="material-symbols-outlined text-md group-hover/btn:translate-x-1 transition-transform">bolt</span>
+</button>
+</div>
+</div>
+<!-- Food Card 6 -->
+<div class="group relative bg-surface-container border border-outline-variant hover:border-primary-fixed transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A massive box of buffalo wings glazed in a shiny, spicy red sauce, garnished with scallions. The setting is a dark pit-crew station with tools and racing accessories blurred in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQvCwaqZA1ehOQafFEZzG7gyZS6YiiNOGtW73DU89IWKWAutD2jyhajj5CCcv-2K1CNTsobx8Z7GyYUMay6dIDGc-y29mSrfZQRv8DtrLRExUEA7MKc2-oCf-DjJqmGSZlWEgHReInVvAj5mc4EUizlnwxP8YUhUj6Btf71x73zTiRfAQCx5CE9xGQLV9BxMX5XJyLoqw5cqtgzIkYhgh7FMB6RmbIvjUgAGh-udF-i_MTJn9rfvlH6wbUr_j0q7OZwSQNaxobi_Y"/>
+<div class="absolute top-0 right-0 bg-primary-fixed text-on-primary-fixed p-stack-sm font-label-technical italic font-black">PIT CREW BOX</div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md italic uppercase text-on-surface">SPOILER WINGS</h3>
+<span class="font-label-price text-label-price text-primary-fixed">$11.00</span>
+</div>
+<div class="space-y-unit border-t border-dashed border-outline-variant pt-stack-sm mt-stack-sm">
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">POWER OUTPUT (HP)</span>
+<span class="font-label-technical text-primary-fixed">920 CAL</span>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">DRAG LEVEL (RPM)</span>
+<div class="flex gap-1 text-primary-fixed">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-unit">
+<span class="font-label-technical text-on-surface-variant uppercase">CHASSIS</span>
+<span class="font-label-technical text-on-surface uppercase">BONE-IN / BUFFALO</span>
+</div>
+</div>
+<button class="mt-stack-md w-full py-stack-sm bg-surface-container-highest border-2 border-primary-fixed/20 text-primary-fixed font-display-lg text-[16px] italic font-black uppercase hover:bg-primary-fixed hover:text-on-primary-fixed transition-all flex items-center justify-center gap-2 group/btn" onclick="addEffect(this)">
+                        ADD TO TANK
+                        <span class="material-symbols-outlined text-md group-hover/btn:translate-x-1 transition-transform">bolt</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t-4 border-primary-fixed relative">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-stack-lg">
+<div class="space-y-stack-md">
+<span class="font-display-lg text-headline-md italic text-on-surface">MADFUD</span>
+<p class="font-label-technical text-label-technical text-on-surface-variant uppercase">The fastest fuel for your digestive system. Precision-engineered flavor profiles.</p>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-technical text-primary-fixed uppercase font-bold mb-2">QUICK LINKS</h4>
+<a class="font-label-technical text-on-secondary-fixed-variant hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 uppercase" href="#">PIT CREW</a>
+<a class="font-label-technical text-on-secondary-fixed-variant hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 uppercase" href="#">SPONSORSHIP</a>
+<a class="font-label-technical text-on-secondary-fixed-variant hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 uppercase" href="#">PRIVACY</a>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-technical text-primary-fixed uppercase font-bold mb-2">TRACK STATUS</h4>
+<div class="flex items-center gap-2 text-primary-fixed">
+<span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+<span class="font-label-technical uppercase">SYSTEMS GREEN</span>
+</div>
+<p class="font-label-technical text-on-surface-variant">AVERAGE DELIVERY TIME: 12:04 MIN</p>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-technical text-primary-fixed uppercase font-bold mb-2">STAY TUNED</h4>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface hover:text-primary-fixed cursor-pointer transition-colors">brand_awareness</span>
+<span class="material-symbols-outlined text-on-surface hover:text-primary-fixed cursor-pointer transition-colors">share</span>
+<span class="material-symbols-outlined text-on-surface hover:text-primary-fixed cursor-pointer transition-colors">public</span>
+</div>
+</div>
+</div>
+<div class="px-margin-mobile md:px-margin-desktop py-stack-md border-t border-outline-variant">
+<p class="font-label-technical text-label-technical text-center md:text-left text-on-surface-variant opacity-50">© 2024 MADFUD RACING DIVISION. ALL RIGHTS RESERVED.</p>
+</div>
+</footer>
+<!-- Scripts -->
+<script>
+        function addEffect(btn) {
+            const rect = btn.getBoundingClientRect();
+            const effect = document.createElement('div');
+            effect.innerText = 'VROOOM!';
+            effect.className = 'vroom-effect text-headline-md';
+            effect.style.left = `${rect.left + window.scrollX + (rect.width / 2)}px`;
+            effect.style.top = `${rect.top + window.scrollY}px`;
+            document.body.appendChild(effect);
+            
+            // Remove after animation
+            setTimeout(() => {
+                effect.remove();
+            }, 800);
+        }
+
+        // Scroll Driver Logic
+        const driver = document.getElementById('driver');
+        let lastScrollY = window.scrollY;
+        
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollPercent = currentScrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const moveY = (scrollPercent * 80) + 10; // Range from 10% to 90%
+            
+            driver.style.top = `${moveY}%`;
+            
+            // Shake driver if scrolling fast
+            const velocity = Math.abs(currentScrollY - lastScrollY);
+            if (velocity > 20) {
+                driver.style.transform = `translateY(-50%) skewX(${(currentScrollY - lastScrollY) * 0.5}deg)`;
+            } else {
+                driver.style.transform = `translateY(-50%)`;
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+    </script>
+</body></html>

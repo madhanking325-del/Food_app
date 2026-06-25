@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MADFUD | RACE TRACKER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Hanken+Grotesk:wght@400;700&family=JetBrains+Mono:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .glitch-text {
+            position: relative;
+            text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                        -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                        0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            animation: glitch 500ms infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+            14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+            15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+            49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+            50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+            99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+            100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75); }
+        }
+
+        .racing-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 5s linear forwards;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .car-move {
+            offset-path: path('M 50 250 C 150 50, 450 50, 550 250 S 850 450, 950 250');
+            animation: follow-path 10s linear infinite;
+        }
+
+        @keyframes follow-path {
+            0% { offset-distance: 0%; }
+            100% { offset-distance: 100%; }
+        }
+
+        .motion-lines {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(195, 244, 0, 0.05) 10px, rgba(195, 244, 0, 0.05) 11px);
+        }
+
+        .halftone-bg {
+            background-image: radial-gradient(#ffffff 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#353535",
+                      "on-secondary-fixed-variant": "#474746",
+                      "tertiary": "#ffffff",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "primary-fixed": "#c3f400",
+                      "on-surface": "#e4e2e1",
+                      "secondary-container": "#474746",
+                      "on-primary": "#283500",
+                      "tertiary-container": "#d7e2ff",
+                      "primary": "#ffffff",
+                      "inverse-on-surface": "#303030",
+                      "secondary-fixed": "#e5e2e1",
+                      "inverse-primary": "#506600",
+                      "primary-container": "#c3f400",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "primary-fixed-dim": "#abd600",
+                      "on-error": "#690005",
+                      "surface-container-lowest": "#0e0e0e",
+                      "error-container": "#93000a",
+                      "error": "#ffb4ab",
+                      "on-secondary-container": "#b7b5b4",
+                      "on-tertiary-fixed-variant": "#004590",
+                      "secondary": "#c8c6c5",
+                      "on-secondary": "#313030",
+                      "surface": "#131313",
+                      "on-error-container": "#ffdad6",
+                      "background": "#131313",
+                      "surface-container-low": "#1b1c1c",
+                      "inverse-surface": "#e4e2e1",
+                      "on-tertiary-fixed": "#001b3f",
+                      "surface-container": "#1f2020",
+                      "on-primary-fixed": "#161e00",
+                      "on-background": "#e4e2e1",
+                      "outline-variant": "#444933",
+                      "tertiary-fixed-dim": "#abc7ff",
+                      "on-surface-variant": "#c4c9ac",
+                      "on-primary-container": "#556d00",
+                      "outline": "#8e9379",
+                      "surface-variant": "#353535",
+                      "tertiary-fixed": "#d7e2ff",
+                      "surface-dim": "#131313",
+                      "surface-container-high": "#2a2a2a",
+                      "on-tertiary": "#002f66",
+                      "surface-bright": "#393939",
+                      "on-primary-fixed-variant": "#3c4d00",
+                      "surface-tint": "#abd600",
+                      "on-tertiary-container": "#0062c7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "stack-sm": "8px",
+                      "stack-lg": "32px",
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Hanken Grotesk"],
+                      "display-lg": ["Anybody"],
+                      "label-price": ["JetBrains Mono"],
+                      "headline-lg-mobile": ["Anybody"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "label-technical": ["JetBrains Mono"],
+                      "headline-md": ["Anybody"],
+                      "headline-lg": ["Anybody"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display-lg": ["72px", {"lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900"}],
+                      "label-price": ["20px", {"lineHeight": "1.0", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-technical": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "headline-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b-2 border-primary-fixed/20 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md max-w-full">
+<div class="font-display-lg text-headline-lg-mobile md:text-headline-lg italic font-black text-primary-fixed tracking-tighter">
+            MADFUD
+        </div>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105" href="#">PIT STOP</a>
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105" href="#">MENU</a>
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105" href="#">TEAM</a>
+<a class="font-body-md text-body-md italic uppercase text-primary-fixed border-b-2 border-primary-fixed pb-1" href="#">HISTORY</a>
+</div>
+<button class="bg-primary-fixed text-on-primary-fixed font-display-lg text-headline-md italic px-6 py-2 skew-x-[-12deg] hover:scale-105 transition-transform active:translate-x-[2px] active:translate-y-[2px]">
+            START ENGINE
+        </button>
+</nav>
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-full w-64 fixed left-0 top-0 z-40 bg-surface-container-low border-r border-outline-variant py-stack-lg pt-24">
+<div class="px-6 mb-stack-lg">
+<div class="flex items-center gap-4 mb-2">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="A portrait of a professional racing driver wearing a high-tech carbon fiber helmet with a yellow visor. The background is a blurred garage with neon green lights and technical equipment, maintaining the high-octane racing aesthetic of MadFud." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMsZ-F29wvSPdRUUsIvDELAOcrZC7P1rtESmXI5X5gwUYZNQFb5fcrI5iphj2KkK9QJEuZAEVDyOGOU1fvxXaPSVEH1qeOTSb8Lw3j3AIqOjEH_H_cZNEzttaY-kKo38RMX60tjVipzTiPhUkeCmhQjfLf6LWr3vdqN_yGo6fvlb63-9jOTauUczKJSzl3G_wtlT7OvNxQBpllBQuFl3U_xY9RM7bgn6dfoYiwfShJgM9jLxyCRHKjaSBvnJcHA1CLsmOnQL2pYIE"/>
+</div>
+<div>
+<p class="font-display-lg text-headline-md italic text-primary-fixed leading-tight">DRIVER #800</p>
+<p class="font-label-technical text-label-technical uppercase text-on-surface-variant">ELITE CLASS</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-stack-md bg-primary-fixed text-on-primary-fixed font-bold p-stack-md mx-2 rounded-r-full hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">speed</span>
+<span class="font-label-technical text-label-technical uppercase">DASHBOARD</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant p-stack-md mx-2 hover:text-primary-fixed hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-label-technical text-label-technical uppercase">GARAGE</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant p-stack-md mx-2 hover:text-primary-fixed hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">stars</span>
+<span class="font-label-technical text-label-technical uppercase">SPONSORS</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant p-stack-md mx-2 hover:text-primary-fixed hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-technical text-label-technical uppercase">SETTINGS</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<button class="w-full border-2 border-primary-fixed text-primary-fixed font-display-lg italic py-3 hover:bg-primary-fixed hover:text-on-primary-fixed transition-all skew-x-[-12deg]">
+                UPGRADE ENGINE
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pt-24 lg:ml-64 min-h-screen relative overflow-hidden">
+<div class="halftone-bg absolute inset-0 pointer-events-none"></div>
+<div class="motion-lines absolute inset-0 pointer-events-none opacity-20"></div>
+<div class="px-margin-mobile md:px-margin-desktop py-stack-lg max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg italic font-black uppercase text-primary-fixed glitch-text">
+                        Mission: Velocity-082
+                    </h1>
+<p class="font-label-technical text-label-technical uppercase text-on-surface-variant tracking-widest mt-2">
+                        LIVE FEED // ORDER TRACKER // SYSTEM STATUS: NOMINAL
+                    </p>
+</div>
+<div class="flex gap-stack-md">
+<div class="bg-surface-container-high p-4 border-l-4 border-primary-fixed skew-x-[-12deg]">
+<p class="text-[10px] font-label-technical uppercase opacity-50">ETA</p>
+<p class="font-display-lg text-headline-md italic">12:45 MIN</p>
+</div>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Racing Circuit Map Visualization -->
+<div class="lg:col-span-8 bg-surface-container-low border border-outline-variant relative h-[500px] overflow-hidden rounded-lg group">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-error text-on-error font-label-technical px-2 py-1 uppercase italic animate-pulse">Live Circuit</span>
+</div>
+<svg class="w-full h-full p-10" fill="none" viewbox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+<!-- Circuit Background Pattern -->
+<defs>
+<pattern height="40" id="grid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(195, 244, 0, 0.05)" stroke-width="1"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="500" width="1000"></rect>
+<!-- The Track -->
+<path d="M 50 250 C 150 50, 450 50, 550 250 S 850 450, 950 250" fill="none" id="track" stroke="#353535" stroke-linecap="round" stroke-width="40"></path>
+<path class="racing-path" d="M 50 250 C 150 50, 450 50, 550 250 S 850 450, 950 250" fill="none" stroke="#c3f400" stroke-dasharray="12 12" stroke-width="4"></path>
+<!-- Status Points -->
+<!-- Grid Start -->
+<circle class="animate-ping opacity-50" cx="50" cy="250" fill="#c3f400" r="12"></circle>
+<circle cx="50" cy="250" fill="#c3f400" r="6"></circle>
+<text class="uppercase" fill="#c3f400" font-family="JetBrains Mono" font-size="12" font-weight="bold" text-anchor="middle" x="50" y="285">GRID START</text>
+<!-- Pit Crew -->
+<circle cx="300" cy="150" fill="#e4e2e1" r="8"></circle>
+<text class="uppercase" fill="#e4e2e1" font-family="JetBrains Mono" font-size="10" font-weight="bold" text-anchor="middle" x="300" y="130">PIT CREW</text>
+<!-- On Track -->
+<circle cx="700" cy="350" fill="#e4e2e1" r="8"></circle>
+<text class="uppercase" fill="#e4e2e1" font-family="JetBrains Mono" font-size="10" font-weight="bold" text-anchor="middle" x="700" y="380">ON TRACK</text>
+<!-- Chequered Flag -->
+<rect fill="white" height="20" stroke="black" stroke-width="1" width="20" x="940" y="240"></rect>
+<text class="uppercase" fill="#ffffff" font-family="JetBrains Mono" font-size="12" font-weight="bold" text-anchor="middle" x="950" y="285">FLAG</text>
+<!-- Neon Delivery Car -->
+<g class="car-move">
+<rect fill="#c3f400" height="16" rx="4" width="30" x="-15" y="-8"></rect>
+<rect fill="#161e00" height="12" width="6" x="8" y="-6"></rect> <!-- Windshield -->
+<circle class="animate-pulse" cx="-10" cy="-10" fill="#c3f400" r="4"></circle> <!-- Lights -->
+<circle class="animate-pulse" cx="-10" cy="10" fill="#c3f400" r="4"></circle>
+</g>
+</svg>
+<!-- Delivery Rider Overlay -->
+<div class="absolute bottom-6 left-6 flex items-center gap-4 bg-surface-container-highest/90 backdrop-blur-md p-4 border border-primary-fixed/30 rounded-lg">
+<div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-fixed" style="font-variation-settings: 'FILL' 1;">electric_moped</span>
+</div>
+<div>
+<p class="font-label-technical text-label-technical text-primary-fixed uppercase">Current Pilot</p>
+<p class="font-display-lg text-headline-md italic">MARCO 'LIGHTNING' V.</p>
+</div>
+</div>
+</div>
+<!-- Telemetry Sidebar -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Real-time Telemetry Card -->
+<div class="bg-surface-container-high p-stack-md border-t-4 border-primary-fixed relative overflow-hidden group">
+<div class="motion-lines absolute inset-0 opacity-10 pointer-events-none"></div>
+<h3 class="font-display-lg text-headline-md italic uppercase text-primary-fixed mb-4">Live Telemetry</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="font-label-technical text-on-surface-variant uppercase">Engine Temp</span>
+<span class="font-label-price text-label-price text-error">OPTIMAL</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="font-label-technical text-on-surface-variant uppercase">Current Speed</span>
+<span class="font-label-price text-label-price">42 KM/H</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="font-label-technical text-on-surface-variant uppercase">Sector 1 Time</span>
+<span class="font-label-price text-label-price">02:14.5</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="font-label-technical text-on-surface-variant uppercase">Fuel Level (Battery)</span>
+<div class="w-24 h-4 bg-surface-container-low border border-outline-variant overflow-hidden">
+<div class="h-full bg-primary-fixed w-[84%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 flex gap-2">
+<div class="flex-1 bg-surface-container-low p-2 text-center skew-x-[-12deg]">
+<p class="text-[10px] font-label-technical uppercase opacity-50">Altitude</p>
+<p class="font-label-price">124M</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-2 text-center skew-x-[-12deg]">
+<p class="text-[10px] font-label-technical uppercase opacity-50">G-Force</p>
+<p class="font-label-price">1.2G</p>
+</div>
+</div>
+</div>
+<!-- Status Log -->
+<div class="bg-surface-container p-stack-md border border-outline-variant relative">
+<h3 class="font-label-technical text-label-technical uppercase text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="w-2 h-2 bg-primary-fixed rounded-full animate-pulse"></span>
+                            Command Center Log
+                        </h3>
+<div class="space-y-3 font-label-technical">
+<div class="flex gap-4 opacity-50">
+<span class="text-primary-fixed">12:04</span>
+<span>GRID START: ORDER CONFIRMED BY PIT CREW</span>
+</div>
+<div class="flex gap-4 opacity-70">
+<span class="text-primary-fixed">12:12</span>
+<span>PIT CREW: CHEF HAS COMMENCED ENGINE WARMUP</span>
+</div>
+<div class="flex gap-4">
+<span class="text-primary-fixed">12:18</span>
+<span class="glitch-text">ON TRACK: PILOT HAS LEFT THE PITS</span>
+</div>
+<div class="flex gap-4 animate-pulse">
+<span class="text-primary-fixed">>></span>
+<span class="text-primary-fixed">CALCULATING NEXT SECTOR...</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Info Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-stack-lg">
+<div class="bg-surface-container-low p-6 border border-outline-variant group hover:border-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary-fixed text-4xl mb-4">restaurant</span>
+<h4 class="font-display-lg text-headline-md italic uppercase mb-2">Order Content</h4>
+<p class="font-body-md text-on-surface-variant">2x Nitro Burgers, 1x Turbo Fries (Large), 1x High-Octane Shake.</p>
+</div>
+<div class="bg-surface-container-low p-6 border border-outline-variant group hover:border-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary-fixed text-4xl mb-4">location_on</span>
+<h4 class="font-display-lg text-headline-md italic uppercase mb-2">Pit Location</h4>
+<p class="font-body-md text-on-surface-variant">Sector 7, Apartment 42B, Neon Plaza, Cyber City.</p>
+</div>
+<div class="bg-surface-container-low p-6 border border-outline-variant group hover:border-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary-fixed text-4xl mb-4">support_agent</span>
+<h4 class="font-display-lg text-headline-md italic uppercase mb-2">Radio Comms</h4>
+<button class="w-full mt-2 bg-surface-container-highest text-on-surface font-label-technical uppercase py-2 flex items-center justify-center gap-2 hover:bg-primary-fixed hover:text-on-primary-fixed transition-all">
+<span class="material-symbols-outlined text-sm">headset_mic</span>
+                        Contact Pilot
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full relative bottom-0 bg-surface-container-lowest border-t-4 border-primary-fixed grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-stack-lg mt-stack-lg">
+<div class="col-span-1 md:col-span-2 lg:col-span-1">
+<div class="font-display-lg text-headline-md italic text-on-surface mb-4">MADFUD</div>
+<p class="font-label-technical text-label-technical text-on-secondary-fixed-variant">
+                © 2024 MADFUD RACING DIVISION. ALL RIGHTS RESERVED.
+            </p>
+</div>
+<div>
+<h5 class="font-label-technical text-primary-fixed font-bold mb-4">PIT CREW</h5>
+<ul class="space-y-2 font-label-technical text-on-secondary-fixed-variant">
+<li><a class="hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all" href="#">TERMS OF SERVICE</a></li>
+<li><a class="hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all" href="#">PIT CREW</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-technical text-primary-fixed font-bold mb-4">SPONSORSHIP</h5>
+<ul class="space-y-2 font-label-technical text-on-secondary-fixed-variant">
+<li><a class="hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all" href="#">SPONSORSHIP</a></li>
+<li><a class="hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all" href="#">PRIVACY</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<div class="bg-surface-container p-4 border border-outline-variant">
+<p class="text-[10px] font-label-technical uppercase text-on-surface-variant mb-1">System Load</p>
+<div class="w-full h-1 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed w-[45%]"></div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Glitch effect on hover for main buttons
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transform = 'skew(-12deg) scale(1.05) translate(2px, -2px)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'skew(-12deg) scale(1) translate(0, 0)';
+            });
+        });
+
+        // Simulate Telemetry Changes
+        setInterval(() => {
+            const speeds = [42, 45, 38, 41, 44, 47];
+            const randomSpeed = speeds[Math.floor(Math.random() * speeds.length)];
+            const speedElement = document.querySelector('.font-label-price:nth-child(2)');
+            if(speedElement) speedElement.textContent = `${randomSpeed} KM/H`;
+        }, 3000);
+    </script>
+</body></html>

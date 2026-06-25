@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MADFUD | THE FINAL LAP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Hanken+Grotesk:wght@400;700&family=JetBrains+Mono:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .glitch-hover:hover {
+            text-shadow: 2px 0 #c3f400, -2px 0 #0062c7;
+            animation: glitch 0.2s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        .tachometer-input:focus-within .indicator-bar {
+            width: 100%;
+        }
+        .halftone-bg {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 8px 8px;
+        }
+        .skew-fix {
+            transform: skewX(-12deg);
+        }
+        .racing-line {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(195, 244, 0, 0.05) 10px,
+                rgba(195, 244, 0, 0.05) 20px
+            );
+        }
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(195, 244, 0, 0.6), 0 0 30px rgba(195, 244, 0, 0.2);
+        }
+        @keyframes flag-wave {
+            0% { transform: rotate(0deg) skew(0deg); }
+            50% { transform: rotate(5deg) skew(5deg); }
+            100% { transform: rotate(0deg) skew(0deg); }
+        }
+        .flag-animation {
+            animation: flag-wave 3s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#353535",
+                        "on-secondary-fixed-variant": "#474746",
+                        "tertiary": "#ffffff",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "primary-fixed": "#c3f400",
+                        "on-surface": "#e4e2e1",
+                        "secondary-container": "#474746",
+                        "on-primary": "#283500",
+                        "tertiary-container": "#d7e2ff",
+                        "primary": "#ffffff",
+                        "inverse-on-surface": "#303030",
+                        "secondary-fixed": "#e5e2e1",
+                        "inverse-primary": "#506600",
+                        "primary-container": "#c3f400",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-fixed-dim": "#abd600",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#b7b5b4",
+                        "on-tertiary-fixed-variant": "#004590",
+                        "secondary": "#c8c6c5",
+                        "on-secondary": "#313030",
+                        "surface": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "background": "#131313",
+                        "surface-container-low": "#1b1c1c",
+                        "inverse-surface": "#e4e2e1",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface-container": "#1f2020",
+                        "on-primary-fixed": "#161e00",
+                        "on-background": "#e4e2e1",
+                        "outline-variant": "#444933",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-surface-variant": "#c4c9ac",
+                        "on-primary-container": "#556d00",
+                        "outline": "#8e9379",
+                        "surface-variant": "#353535",
+                        "tertiary-fixed": "#d7e2ff",
+                        "surface-dim": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary": "#002f66",
+                        "surface-bright": "#393939",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "surface-tint": "#abd600",
+                        "on-tertiary-container": "#0062c7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Anybody"],
+                        "label-price": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Anybody"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-technical": ["JetBrains Mono"],
+                        "headline-md": ["Anybody"],
+                        "headline-lg": ["Anybody"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-lg": ["72px", {"lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900"}],
+                        "label-price": ["20px", {"lineHeight": "1.0", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-technical": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden halftone-bg">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b-2 border-primary-fixed/20 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md max-w-full">
+<div class="font-display-lg text-headline-lg-mobile italic font-black text-primary-fixed tracking-tighter hover:skew-x-[-12deg] transition-all duration-75 cursor-pointer">MADFUD</div>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105 transition-all duration-75" href="#">PIT STOP</a>
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105 transition-all duration-75" href="#">MENU</a>
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105 transition-all duration-75" href="#">TEAM</a>
+<a class="font-body-md text-body-md italic uppercase text-on-surface-variant hover:text-primary-fixed transition-colors hover:skew-x-[-12deg] hover:scale-105 transition-all duration-75" href="#">HISTORY</a>
+</div>
+<button class="bg-primary-fixed text-on-primary-fixed px-stack-lg py-stack-sm font-display-lg italic font-bold skew-x-[-12deg] hover:scale-105 active:translate-x-[2px] active:translate-y-[2px] transition-all">START ENGINE</button>
+</nav>
+<main class="pt-32 pb-margin-desktop px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto relative min-h-screen">
+<!-- Animated Checkered Flag Corner -->
+<div class="fixed top-24 -right-12 opacity-20 pointer-events-none z-0">
+<svg class="flag-animation" height="400" viewbox="0 0 100 100" width="400">
+<rect fill="none" height="100" width="100"></rect>
+<path d="M0 0h10v10H0zm20 0h10v10H20zm20 0h10v10H40zm20 0h10v10H60zm20 0h10v10H80zM10 10h10v10H10zm20 10h10v10H20zm20 0h10v10H40zm20 0h10v10H60zm20 0h10v10H80zM0 20h10v10H0zm20 0h10v10H20zm20 0h10v10H40zm20 0h10v10H60zm20 0h10v10H80zM10 30h10v10H10zm20 10h10v10H20zm20 0h10v10H40zm20 0h10v10H60zm20 0h10v10H80z" fill="#ffffff"></path>
+</svg>
+</div>
+<header class="mb-stack-lg relative z-10">
+<h1 class="font-display-lg text-display-lg italic font-black text-primary-fixed tracking-tighter uppercase mb-2">THE FINAL LAP</h1>
+<div class="h-1 w-full bg-primary-fixed/20 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary-fixed w-1/3 animate-[pulse_2s_infinite]"></div>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter relative z-10">
+<!-- Checkout Form Section -->
+<div class="lg:col-span-8 space-y-stack-lg">
+<!-- Driver Details -->
+<section class="bg-surface-container-low border-l-4 border-primary-fixed p-stack-lg racing-line">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-primary-fixed">person_pin</span>
+<h2 class="font-display-lg text-headline-md italic uppercase">DRIVER DETAILS</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="tachometer-input group border-b-2 border-outline-variant py-2">
+<label class="font-label-technical text-label-technical text-on-surface-variant block mb-1">CALLSIGN (NAME)</label>
+<input class="bg-transparent border-none w-full font-body-lg text-on-surface placeholder:text-on-surface-variant/30 focus:ring-0 p-0" placeholder="e.g. LANDO NORRIS" type="text"/>
+<div class="indicator-bar h-[2px] bg-primary-fixed w-0 transition-all duration-300"></div>
+</div>
+<div class="tachometer-input group border-b-2 border-outline-variant py-2">
+<label class="font-label-technical text-label-technical text-on-surface-variant block mb-1">COMMS (EMAIL)</label>
+<input class="bg-transparent border-none w-full font-body-lg text-on-surface placeholder:text-on-surface-variant/30 focus:ring-0 p-0" placeholder="RACER@MADFUD.COM" type="email"/>
+<div class="indicator-bar h-[2px] bg-primary-fixed w-0 transition-all duration-300"></div>
+</div>
+</div>
+</section>
+<!-- Pit Stop Address -->
+<section class="bg-surface-container-low border-l-4 border-primary-fixed p-stack-lg">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-primary-fixed">dock</span>
+<h2 class="font-display-lg text-headline-md italic uppercase">PIT STOP ADDRESS</h2>
+</div>
+<div class="space-y-stack-md">
+<div class="tachometer-input group border-b-2 border-outline-variant py-2">
+<label class="font-label-technical text-label-technical text-on-surface-variant block mb-1">STREET CIRCUIT</label>
+<input class="bg-transparent border-none w-full font-body-lg text-on-surface placeholder:text-on-surface-variant/30 focus:ring-0 p-0" placeholder="123 RACING AVENUE" type="text"/>
+<div class="indicator-bar h-[2px] bg-primary-fixed w-0 transition-all duration-300"></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-gutter">
+<div class="tachometer-input group border-b-2 border-outline-variant py-2">
+<label class="font-label-technical text-label-technical text-on-surface-variant block mb-1">SECTOR (CITY)</label>
+<input class="bg-transparent border-none w-full font-body-lg text-on-surface placeholder:text-on-surface-variant/30 focus:ring-0 p-0" placeholder="DOWNTOWN" type="text"/>
+<div class="indicator-bar h-[2px] bg-primary-fixed w-0 transition-all duration-300"></div>
+</div>
+<div class="tachometer-input group border-b-2 border-outline-variant py-2">
+<label class="font-label-technical text-label-technical text-on-surface-variant block mb-1">ZIP CODE</label>
+<input class="bg-transparent border-none w-full font-body-lg text-on-surface placeholder:text-on-surface-variant/30 focus:ring-0 p-0" placeholder="80085" type="text"/>
+<div class="indicator-bar h-[2px] bg-primary-fixed w-0 transition-all duration-300"></div>
+</div>
+<div class="tachometer-input group border-b-2 border-outline-variant py-2 col-span-2 md:col-span-1">
+<label class="font-label-technical text-label-technical text-on-surface-variant block mb-1">SUITE/PIT #</label>
+<input class="bg-transparent border-none w-full font-body-lg text-on-surface placeholder:text-on-surface-variant/30 focus:ring-0 p-0" placeholder="GARAGE 4" type="text"/>
+<div class="indicator-bar h-[2px] bg-primary-fixed w-0 transition-all duration-300"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Fuel Method -->
+<section class="bg-surface-container-low border-l-4 border-primary-fixed p-stack-lg racing-line">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-primary-fixed">local_gas_station</span>
+<h2 class="font-display-lg text-headline-md italic uppercase">FUEL METHOD</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<label class="cursor-pointer group relative">
+<input checked="" class="sr-only peer" name="payment" type="radio"/>
+<div class="bg-surface-container-high p-stack-md border-2 border-transparent peer-checked:border-primary-fixed transition-all hover:bg-surface-container-highest flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed scale-150 mb-2">credit_card</span>
+<span class="font-label-technical text-label-technical">NITRO CARD</span>
+</div>
+</label>
+<label class="cursor-pointer group relative">
+<input class="sr-only peer" name="payment" type="radio"/>
+<div class="bg-surface-container-high p-stack-md border-2 border-transparent peer-checked:border-primary-fixed transition-all hover:bg-surface-container-highest flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed scale-150 mb-2">account_balance_wallet</span>
+<span class="font-label-technical text-label-technical">DIGITAL VAULT</span>
+</div>
+</label>
+<label class="cursor-pointer group relative">
+<input class="sr-only peer" name="payment" type="radio"/>
+<div class="bg-surface-container-high p-stack-md border-2 border-transparent peer-checked:border-primary-fixed transition-all hover:bg-surface-container-highest flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed scale-150 mb-2">payments</span>
+<span class="font-label-technical text-label-technical">PIT CASH</span>
+</div>
+</label>
+</div>
+</section>
+</div>
+<!-- Summary Sidebar -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-low border-2 border-primary-fixed p-stack-md sticky top-28">
+<div class="bg-on-surface text-surface p-stack-sm mb-stack-md skew-x-[-12deg] text-center">
+<h3 class="font-display-lg text-headline-md font-black italic uppercase">RACING RESULTS</h3>
+</div>
+<div class="space-y-stack-sm font-label-technical text-label-technical uppercase">
+<div class="flex justify-between border-b border-outline-variant pb-2">
+<span>01 // MAD BURGER MAX</span>
+<span class="font-label-price">$18.00</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant pb-2">
+<span>02 // NITRO FRIES (LRG)</span>
+<span class="font-label-price">$06.50</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant pb-2">
+<span>03 // TURBO COLA</span>
+<span class="font-label-price">$04.00</span>
+</div>
+<div class="pt-stack-md space-y-1">
+<div class="flex justify-between text-on-surface-variant">
+<span>GRID SUBTOTAL</span>
+<span>$28.50</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>PIT CREW FEE</span>
+<span>$02.00</span>
+</div>
+<div class="flex justify-between text-primary-fixed">
+<span>AERO DISCOUNT</span>
+<span>-$05.00</span>
+</div>
+</div>
+<div class="mt-stack-lg pt-stack-md border-t-4 border-double border-primary-fixed flex justify-between items-end">
+<div>
+<span class="text-on-surface-variant block">TOTAL TIME COST</span>
+<span class="font-display-lg text-headline-lg italic font-black text-primary-fixed">$25.50</span>
+</div>
+<span class="material-symbols-outlined text-primary-fixed text-4xl animate-bounce">flag</span>
+</div>
+</div>
+<button class="w-full mt-stack-lg bg-primary-fixed text-on-primary-fixed font-display-lg text-headline-md italic font-black py-stack-md neon-glow hover:scale-[1.02] active:scale-95 transition-all glitch-hover">
+                        IGNITION
+                    </button>
+<p class="text-[10px] font-label-technical text-on-surface-variant mt-stack-md text-center">
+                        BY CLICKING IGNITION, YOU AGREE TO OUR TERMS OF SERVICE AND THE HIGH-SPEED DELIVERY PROTOCOL.
+                    </p>
+</div>
+<!-- Promo Card -->
+<div class="mt-gutter bg-primary-fixed-variant text-primary-fixed p-stack-md border-2 border-primary-fixed italic relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:rotate-12 transition-transform">
+<span class="material-symbols-outlined text-8xl">bolt</span>
+</div>
+<p class="font-display-lg text-headline-md font-black uppercase leading-none">WANT 2x FUEL?<br/>JOIN MADFUD+ ELITE</p>
+<a class="inline-block mt-stack-sm font-label-technical underline decoration-2" href="#">UPGRADE ENGINE NOW</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full relative bottom-0 bg-surface-container-lowest border-t-4 border-primary-fixed">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-stack-lg">
+<div class="col-span-1 md:col-span-2">
+<div class="font-display-lg text-headline-md italic text-on-surface mb-stack-sm">MADFUD RACING</div>
+<p class="font-label-technical text-label-technical text-on-secondary-fixed-variant max-w-sm">
+                    DELIVERING AT THE LIMIT. FROM THE PIT TO YOUR PORCH IN RECORD TIME. GENETICALLY ENGINEERED FOR SPEED.
+                </p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-technical text-primary-fixed mb-2">QUICK LINKS</span>
+<a class="font-label-technical text-on-secondary-fixed-variant hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all uppercase" href="#">TERMS OF SERVICE</a>
+<a class="font-label-technical text-on-secondary-fixed-variant hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all uppercase" href="#">PIT CREW</a>
+<a class="font-label-technical text-on-secondary-fixed-variant hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all uppercase" href="#">SPONSORSHIP</a>
+<a class="font-label-technical text-on-secondary-fixed-variant hover:text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all uppercase" href="#">PRIVACY</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-technical text-primary-fixed mb-2">SOCIAL CHANNELS</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant hover:text-primary-fixed cursor-pointer transition-colors">hub</span>
+<span class="material-symbols-outlined text-on-secondary-fixed-variant hover:text-primary-fixed cursor-pointer transition-colors">share_reviews</span>
+<span class="material-symbols-outlined text-on-secondary-fixed-variant hover:text-primary-fixed cursor-pointer transition-colors">sensors</span>
+</div>
+<div class="mt-stack-md">
+<p class="font-label-technical text-label-technical text-on-secondary-fixed-variant">© 2024 MADFUD RACING DIVISION. ALL RIGHTS RESERVED.</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Tachometer-like progress on input
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                const bar = e.target.closest('.tachometer-input').querySelector('.indicator-bar');
+                const progress = (e.target.value.length / 20) * 100;
+                bar.style.width = Math.min(progress, 100) + '%';
+                
+                // Color change based on progress
+                if (progress > 80) {
+                    bar.style.backgroundColor = '#ffb4ab'; // Error/Redline color
+                } else {
+                    bar.style.backgroundColor = '#c3f400'; // Primary color
+                }
+            });
+        });
+
+        // Ignition click effect
+        document.querySelector('.glitch-hover').addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+                alert('IGNITION SYSTEM ENGAGED. PREPARING DEPARTURE.');
+            }, 100);
+        });
+    </script>
+</body></html>
